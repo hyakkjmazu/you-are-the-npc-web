@@ -15,16 +15,26 @@ export interface Message {
   role: 'user' | 'model' | 'system';
   text: string;
   protocol?: DialogueProtocol;
-  bioStatus?: 'STABLE' | 'STRESS' | 'PUPIL' | 'COLLAPSE';
+  bioStatus?: 'STABLE' | 'STRESS' | 'PUPIL' | 'COLLAPSE' | 'CORRUPTED';
 }
+
+export type EndingType = 'SHOPKEEPER' | 'GUARD' | 'WIDOW' | 'NONE' | 'VOID_COLLAPSE';
 
 export interface GameState {
   lang: Language;
-  phase: 'LOBBY' | 'BRIEFING' | 'INTERACTION' | 'ENDGAME';
+  phase: 'LOBBY' | 'INTRO' | 'BRIEFING' | 'INTERACTION' | 'ENDGAME';
   selectedNPCId: string | null;
   suspicion: number;
   tension: number;
+  resistance: number;
+  mentalShield: number;
+  syncRate: number;
+  entropy: number; // Mới: Độ hỗn loạn của hệ thống
+  isDeepDive: boolean; // Mới: Trạng thái thâm nhập sâu
   messages: Message[];
   isAccusing: boolean;
-  result: 'WIN' | 'LOSE' | 'CHAOS' | null;
+  result: EndingType | null;
+  isBroken: boolean;
+  discoveredFragments: string[];
+  interrogationStyle: string[];
 }

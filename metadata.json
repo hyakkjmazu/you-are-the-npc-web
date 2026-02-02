@@ -1,5 +1,5 @@
 {
-  "name": "YOU ARE THE NPC - Vercel Optimized",
-  "description": "Fixed 404 routing and asset loading for public testing.",
+  "name": "YOU ARE THE NPC - Production Ready",
+  "description": "Phiên bản v1.3 đã tối ưu hóa build pipeline cho Vercel và Cloudflare Tunnels.",
   "requestFramePermissions": []
 }

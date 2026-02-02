@@ -12,45 +12,56 @@ export const generateNPCResponse = async (
   history: { role: 'user' | 'model' | 'system', text: string }[],
   language: Language
 ) => {
-  // Always initialize inside the function to get the latest process.env.API_KEY directly
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const apiKey = process.env.API_KEY;
   
+  if (!apiKey) {
+    throw new Error("MISSING_API_KEY");
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
+  
+  const LORE_DATABASE = `
+    FINAL_DATABASE_OVERRIDE:
+    - The Incident: An attempt to upload human consciousness to 'The Void'. It failed, leaving 'Ghosts' in the machine.
+    - The Operator: You are not just a user, you are a digital exorcist.
+    - The NPCs: They are fragments of the original architect's soul, hiding the 'Core Keys'.
+
+    SPECIFIC_DATA:
+    - Shopkeeper: His ledger contains the encryption keys for the city's air filtration.
+    - Guard: His 'Family' never existed; they were part of his training simulation.
+    - Widow: She is the only real human left, trapped in a neural loop.
+  `;
+
   const instruction = `
     ${SYSTEM_PROMPT}
-    PREFERRED_LANGUAGE: ${language === 'VI' ? 'Vietnamese' : 'English'}
-    ROLE_NAME: ${npc.name[language]}
-    PERSONALITY: ${npc.personality[language]}
-    SECRET_OBJECTIVE: ${npc.secretObjective[language]}
-    PROTOCOL_APPLIED: ${protocol}
-    CURRENT_SUSPICION: ${currentSuspicion}/100
-    CURRENT_TENSION: ${globalTension}/100
-    
-    CRITICAL: Always keep responses under 2 sentences. Use a dramatic, cold, and terminal-like tone.
+    ${LORE_DATABASE}
+    LANGUAGE: ${language === 'VI' ? 'Vietnamese' : 'English'}
+    MODEL_PROFILE: You are now using HIGH-PRECISION logic (Gemini 3 Pro).
+    If the user is inconsistent, call them out. If they use logic, respond with emotion. If they use emotion, respond with cold logic.
+    Current System Integrity: HACKED.
+    NPC_NAME: ${npc.name[language]}
+    TARGET_DATA: ${npc.secretObjective[language]}
   `;
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3-pro-preview',
       contents: [
         ...history
           .filter(h => h.role !== 'system')
           .map(h => ({ role: h.role as 'user' | 'model', parts: [{ text: h.text }] })),
-        { role: 'user', parts: [{ text: `[INPUT]: ${userMessage}\n[PROTOCOL]: ${protocol}` }] }
+        { role: 'user', parts: [{ text: `[QUERY]: ${userMessage} [PROTOCOL]: ${protocol} [SYSTEM_TENSION]: ${globalTension}` }] }
       ],
       config: {
         systemInstruction: instruction,
-        temperature: 0.9,
-        topP: 0.95,
+        temperature: 0.8,
+        thinkingConfig: { thinkingBudget: 4000 } // Tận dụng khả năng suy nghĩ sâu của model Pro
       }
     });
 
-    // Use .text property directly as per guidelines
-    return response.text || (language === 'VI' ? "..." : "...");
+    return response.text || "...";
   } catch (error: any) {
-    console.error("AI Interlink Failure:", error);
-    // Return a themed error message instead of failing
-    return language === 'VI' 
-      ? "[LỖI KẾT NỐI]: ĐỐI TƯỢNG ĐANG CHỐNG ĐỐI TRUY CẬP." 
-      : "[LINK_FAILURE]: SUBJECT IS RESISTING ACCESS.";
+    console.error("Gemini Pro Engine Error:", error);
+    throw error;
   }
 };
