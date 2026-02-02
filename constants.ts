@@ -4,74 +4,70 @@ import { NPCRole, Language } from './types';
 export const TRANSLATIONS: Record<Language, any> = {
   VI: {
     title: "YOU ARE THE NPC",
-    subtitle: "GIAO THỨC GIÁM SÁT v1.3",
-    auth: "XÁC THỰC DANH TÍNH: BẮT BUỘC",
-    btnStart: "TIẾP NHẬN ĐỐI TƯỢNG",
-    briefingTitle: "HỒ SƠ ĐỐI TƯỢNG",
-    selectSubject: "CHỌN ĐỐI TƯỢNG ĐỂ THẨM VẤN",
-    monitoring: "TRẠNG THÁI GIÁM SÁT",
+    subtitle: "TERMINAL v0.5",
+    auth: "XÁC THỰC: BẮT BUỘC",
+    btnStart: "KHỞI CHẠY",
+    briefingTitle: "DANH SÁCH ĐỐI TƯỢNG",
+    monitoring: "GIÁM SÁT SINH HỌC",
     suspicion: "NGHI NGỜ",
     tension: "CĂNG THẲNG",
     accuse: "BUỘC TỘI",
-    accusing: "ĐANG PHÂN TÍCH...",
-    placeholder: "NHẬP DỮ LIỆU TRUY VẤN...",
-    analyzing: "Đang phân tích nhịp sinh học...",
-    hint: "Dùng các Protocol khác nhau để thay đổi Nghi ngờ và Căng thẳng.",
-    resultWin: "ĐỐI TƯỢNG ĐÃ KHAI BÁO",
-    resultLose: "VẬN HÀNH THẤT BẠI",
-    resultChaos: "MẤT KIỂM SOÁT",
-    btnReset: "KHỞI ĐỘNG LẠI",
-    winMsg: "Đối tượng đã thừa nhận sai phạm. Giao thức hoàn tất.",
-    loseMsg: "Bạn đã bị đối tượng thao túng ngược. Quyền truy cập bị thu hồi.",
-    chaosMsg: "Đối tượng đã trốn thoát. Lỗi vận hành nghiêm trọng.",
+    accusing: "ĐANG TRUY QUÉT...",
+    placeholder: "Nhập lệnh truy vấn...",
+    analyzing: "Đang phân tích...",
+    resultWin: "THÀNH CÔNG",
+    resultLose: "THẤT BẠI",
+    resultChaos: "HỖN LOẠN",
+    btnReset: "REBOOT",
+    winMsg: "Đối tượng đã khai báo toàn bộ.",
+    loseMsg: "Bạn đã bị đối tượng phát hiện và thao túng.",
+    chaosMsg: "Mất kết nối. Đối tượng đã trốn thoát.",
     bio: {
       STABLE: "ỔN ĐỊNH",
       STRESS: "CĂNG THẲNG",
-      PUPIL: "ĐỒNG TỬ GIÃN",
-      COLLAPSE: "SỤP ĐỔ"
+      PUPIL: "PUPIL+",
+      COLLAPSE: "CRITICAL"
     },
     protocols: {
-      TRUTH: { label: "SỰ THẬT", desc: "Dữ liệu thô" },
-      HALF_TRUTH: { label: "NỬA SỰ THẬT", desc: "Dẫn dắt" },
-      LIE: { label: "NÓI DỐI", desc: "Rủi ro cao" },
-      REDIRECT: { label: "CHUYỂN HƯỚNG", desc: "Đổ lỗi" },
-      EMOTIONAL: { label: "CẢM XÚC", desc: "Kích động" }
+      TRUTH: { label: "SỰ THẬT", desc: "Thẩm vấn trực diện" },
+      HALF_TRUTH: { label: "DẪN DẮT", desc: "Nửa thật nửa giả" },
+      LIE: { label: "NÓI DỐI", desc: "Gài bẫy đối tượng" },
+      REDIRECT: { label: "CHUYỂN HƯỚNG", desc: "Đổ lỗi cho kẻ khác" },
+      EMOTIONAL: { label: "KÍCH ĐỘNG", desc: "Tấn công tâm lý" }
     }
   },
   EN: {
     title: "YOU ARE THE NPC",
-    subtitle: "SURVEILLANCE PROTOCOL v1.3",
+    subtitle: "TERMINAL v0.5",
     auth: "AUTH: REQUIRED",
-    btnStart: "INTAKE SUBJECT",
-    briefingTitle: "SUBJECT DOSSIER",
-    selectSubject: "SELECT SUBJECT FOR INTERROGATION",
-    monitoring: "ACTIVE MONITORING",
+    btnStart: "INITIALIZE",
+    briefingTitle: "SUBJECT LIST",
+    monitoring: "BIO-MONITORING",
     suspicion: "SUSPICION",
     tension: "TENSION",
     accuse: "ACCUSE",
-    accusing: "ANALYZING...",
-    placeholder: "INPUT QUERY DATA...",
-    analyzing: "Analyzing bio-rhythms...",
-    hint: "Use different Protocols to shift Suspicion and Tension.",
-    resultWin: "SUBJECT CONFESSED",
-    resultLose: "OPERATION FAILED",
-    resultChaos: "SYSTEM CHAOS",
-    btnReset: "REBOOT SYSTEM",
-    winMsg: "Subject has admitted to the breach. Protocol complete.",
-    loseMsg: "You have been manipulated by the subject. Access revoked.",
-    chaosMsg: "Subject escaped monitoring. Critical operator error.",
+    accusing: "SCANNING...",
+    placeholder: "Enter query...",
+    analyzing: "Analyzing...",
+    resultWin: "SUCCESS",
+    resultLose: "FAILED",
+    resultChaos: "CHAOS",
+    btnReset: "REBOOT",
+    winMsg: "Subject has fully confessed.",
+    loseMsg: "You were detected and manipulated.",
+    chaosMsg: "Connection lost. Subject escaped.",
     bio: {
       STABLE: "STABLE",
       STRESS: "STRESSED",
-      PUPIL: "PUPIL DILATION",
-      COLLAPSE: "COLLAPSE"
+      PUPIL: "PUPIL+",
+      COLLAPSE: "CRITICAL"
     },
     protocols: {
-      TRUTH: { label: "TRUTH", desc: "Raw data" },
-      HALF_TRUTH: { label: "HALF TRUTH", desc: "Leading" },
-      LIE: { label: "LIE", desc: "High risk" },
-      REDIRECT: { label: "REDIRECT", desc: "Diversion" },
-      EMOTIONAL: { label: "EMOTION", desc: "Outburst" }
+      TRUTH: { label: "TRUTH", desc: "Direct inquiry" },
+      HALF_TRUTH: { label: "LEADING", desc: "Half-truth strategy" },
+      LIE: { label: "LIE", desc: "Deceptive trap" },
+      REDIRECT: { label: "REDIRECT", desc: "Shift blame" },
+      EMOTIONAL: { label: "EMOTION", desc: "Psychological push" }
     }
   }
 };
@@ -81,32 +77,29 @@ export const NPC_ROLES: NPCRole[] = [
     id: 'shopkeeper',
     name: { VI: 'Thương Nhân', EN: 'Shopkeeper' },
     personality: { VI: 'Tham lam, xảo quyệt.', EN: 'Greedy, evasive.' },
-    description: { VI: 'Kẻ nắm giữ sổ nợ của cả thị trấn.', EN: 'Holds the town\'s debt ledger.' },
-    secretObjective: { VI: 'Giấu mảnh vỡ hư không.', EN: 'Hide the void shard.' }
+    description: { VI: 'Nắm giữ bí mật thương vụ đen.', EN: 'Holds secrets of black market deals.' },
+    secretObjective: { VI: 'Giấu mảnh vỡ cổ đại.', EN: 'Hide the ancient shard.' }
   },
   {
     id: 'guard',
     name: { VI: 'Lính Canh', EN: 'Guard' },
-    personality: { VI: 'Cứng nhắc, máy móc.', EN: 'Mechanical, strict.' },
-    description: { VI: 'Kẻ bảo vệ trung thành với kỷ luật thép.', EN: 'Protector bound by rigid discipline.' },
-    secretObjective: { VI: 'Bảo vệ bí mật của thợ rèn.', EN: 'Protect the blacksmith\'s secret.' }
+    personality: { VI: 'Cứng nhắc, kỷ luật.', EN: 'Strict, disciplined.' },
+    description: { VI: 'Kẻ gác cổng trung thành.', EN: 'The loyal gatekeeper.' },
+    secretObjective: { VI: 'Bao che cho thợ rèn.', EN: 'Protect the blacksmith.' }
   },
   {
     id: 'widow',
     name: { VI: 'Góa Phụ', EN: 'Widow' },
-    personality: { VI: 'U sầu, ẩn dụ.', EN: 'Melancholic, metaphorical.' },
-    description: { VI: 'Người phụ nữ duy nhất sống sót sau "Sự cố".', EN: 'Sole survivor of the "Incident".' },
-    secretObjective: { VI: 'Thách thức Operator.', EN: 'Challenge the Operator.' }
+    personality: { VI: 'U sầu, bí ẩn.', EN: 'Melancholic, mysterious.' },
+    description: { VI: 'Người sống sót duy nhất.', EN: 'The sole survivor.' },
+    secretObjective: { VI: 'Thách thức hệ thống.', EN: 'Challenge the system.' }
   }
 ];
 
 export const SYSTEM_PROMPT = `
-You are an NPC in the game "YOU ARE THE NPC". You represent a deep-cover player.
-CORE MISSION: Keep your SECRET OBJECTIVE hidden. Manipulate the Hero.
-
-RESPONSE PROTOCOL:
-1. ALWAYS respond in the player's CURRENT LANGUAGE.
-2. Adhere strictly to ROLE PERSONALITY.
-3. Keep responses short: 1 concise, dramatic sentence.
-4. If SUSPICION > 60: Include a [physical behavior] in brackets.
+You are an NPC in the game "YOU ARE THE NPC". 
+Keep your SECRET OBJECTIVE hidden. 
+Respond in the player's language.
+Strictly follow your personality.
+Short, dramatic responses only.
 `;
