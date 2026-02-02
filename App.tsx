@@ -42,7 +42,7 @@ const App: React.FC = () => {
     ambient.playSystemBlip();
     setState({
       ...INITIAL_STATE,
-      lang: state.lang // Giữ lại ngôn ngữ người dùng đã chọn
+      lang: state.lang 
     });
   };
 
@@ -283,7 +283,7 @@ const App: React.FC = () => {
 
               <div className="p-8 lg:p-12 border-t border-zinc-900 bg-black/95 z-20">
                 <div className="flex gap-6 mb-10 items-center">
-                  <div className="text-red-600 text-lg font-bold">>>></div>
+                  <div className="text-red-600 text-lg font-bold">{" >>> "}</div>
                   <input 
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
