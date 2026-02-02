@@ -1,5 +1,5 @@
 {
-  "name": "YOU ARE THE NPC - Production Build",
-  "description": "Final psychological interrogation game optimized for smooth NPC interaction and ambient atmosphere.",
+  "name": "YOU ARE THE NPC - Vercel Optimized",
+  "description": "Fixed 404 routing and asset loading for public testing.",
   "requestFramePermissions": []
 }

@@ -6,14 +6,14 @@ import { DialogueProtocol, NPCRole, Language } from "../types";
 export const generateNPCResponse = async (
   npc: NPCRole,
   userMessage: string,
-  cardType: DialogueProtocol,
+  protocol: DialogueProtocol,
   currentSuspicion: number,
   globalTension: number,
   history: { role: 'user' | 'model' | 'system', text: string }[],
   language: Language
 ) => {
+  // Always initialize inside the function to get the latest process.env.API_KEY directly
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  const model = 'gemini-3-flash-preview';
   
   const instruction = `
     ${SYSTEM_PROMPT}
@@ -21,29 +21,36 @@ export const generateNPCResponse = async (
     ROLE_NAME: ${npc.name[language]}
     PERSONALITY: ${npc.personality[language]}
     SECRET_OBJECTIVE: ${npc.secretObjective[language]}
-    PROTOCOL_APPLIED: ${cardType}
+    PROTOCOL_APPLIED: ${protocol}
     CURRENT_SUSPICION: ${currentSuspicion}/100
     CURRENT_TENSION: ${globalTension}/100
+    
+    CRITICAL: Always keep responses under 2 sentences. Use a dramatic, cold, and terminal-like tone.
   `;
 
   try {
     const response = await ai.models.generateContent({
-      model,
+      model: 'gemini-3-flash-preview',
       contents: [
         ...history
           .filter(h => h.role !== 'system')
           .map(h => ({ role: h.role as 'user' | 'model', parts: [{ text: h.text }] })),
-        { role: 'user', parts: [{ text: `[Hero Input]: ${userMessage}\n[Protocol]: ${cardType}` }] }
+        { role: 'user', parts: [{ text: `[INPUT]: ${userMessage}\n[PROTOCOL]: ${protocol}` }] }
       ],
       config: {
         systemInstruction: instruction,
-        temperature: 0.8,
+        temperature: 0.9,
+        topP: 0.95,
       }
     });
 
-    return response.text?.trim() || (language === 'VI' ? "..." : "...");
+    // Use .text property directly as per guidelines
+    return response.text || (language === 'VI' ? "..." : "...");
   } catch (error: any) {
-    console.error("AI Error:", error);
-    return language === 'VI' ? "Đối tượng giữ im lặng đầy ẩn ý." : "Subject remains silent.";
+    console.error("AI Interlink Failure:", error);
+    // Return a themed error message instead of failing
+    return language === 'VI' 
+      ? "[LỖI KẾT NỐI]: ĐỐI TƯỢNG ĐANG CHỐNG ĐỐI TRUY CẬP." 
+      : "[LINK_FAILURE]: SUBJECT IS RESISTING ACCESS.";
   }
 };
